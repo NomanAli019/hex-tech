@@ -8,7 +8,7 @@ import { Card } from "@/components/ui/card";
 const teamMembers = [
   {
     id: 1,
-    name: "Team Member 1",
+    name: "Noman Ali Khan",
     role: "Founder & CEO",
     bio: "Visionary leader driving innovation and growth",
   },

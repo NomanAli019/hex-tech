@@ -1,53 +1,60 @@
 'use client';
 
 import { useState } from "react";
+import Image from "next/image";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 
 const projects = [
   {
-  id: 1,
-  title: "Variostrong",
-  category: "3D Design",
-  description:
-    "A smart gym machine concept brought to life with 3D design — featuring an AI workout assistant, hydraulic resistance system, and a virtual training environment for full-body exercises.",
-},
- {
-  id: 2,
-  title: "MarineOptim",
-  category: "Web Development",
-  description:
-    "A cutting-edge digital platform for optimizing marine operations and vessel performance — delivering real-time analytics, fuel-efficiency insights, and intelligent scheduling across global fleets.",
-},
-{
-  id: 3,
-  title: "Projectivity.ai",
-  category: "SaaS",
-  description:
-    "AI-powered task management platform that analyzes job descriptions to auto-generate projects, assign tasks to available employees, and streamline collaboration with real-time progress tracking and team updates.",
-},
+    id: 1,
+    title: "Variostrong",
+    category: "3D Design",
+    description:
+      "A smart gym machine concept brought to life with 3D design — featuring an AI workout assistant, hydraulic resistance system, and a virtual training environment for full-body exercises.",
+    image: "/projectimages/varioimage.png",
+  },
   {
-  id: 4,
-  title: "Glucowatch 3D",
-  category: "3D Design",
-  description:
-    "A 3D concept and AR showcase of a smart glucose monitoring wristband designed for diabetic patients, featuring a Blender-rendered promotional video demonstrating its real-time health tracking capabilities.",
-},
+    id: 2,
+    title: "MarineOptim",
+    category: "Web Development",
+    description:
+      "A cutting-edge digital platform for optimizing marine operations and vessel performance — delivering real-time analytics, fuel-efficiency insights, and intelligent scheduling across global fleets.",
+    image: "/projectimages/marineoptim.JPG",
+  },
   {
-  id: 5,
-  title: "Shiftally",
-  category: "SaaS / Web Development",
-  description:
-    "A SaaS-based shift management and job portal platform where contractors post available shifts and workers claim them in real time, with a dual-sided payment system for both job providers and seekers.",
-},
- {
-  id: 6,
-  title: "Project 8 VIP",
-  category: "SaaS / Automation",
-  description:
-    "An AI-driven Telegram bot that interacts with users, manages free and VIP signal groups, and automates PayPal-based subscription payments through seamless integration with the Telegram Bot API.",
-},
+    id: 3,
+    title: "Projectivity.ai",
+    category: "SaaS",
+    description:
+      "AI-powered task management platform that analyzes job descriptions to auto-generate projects, assign tasks to available employees, and streamline collaboration with real-time progress tracking and team updates.",
+    image: "/projectimages/projectivity.JPG",
+  },
+  {
+    id: 4,
+    title: "Glucowatch 3D",
+    category: "3D Design",
+    description:
+      "A 3D concept and AR showcase of a smart glucose monitoring wristband designed for diabetic patients, featuring a Blender-rendered promotional video demonstrating its real-time health tracking capabilities.",
+    image: "/projectimages/glucowave.JPG",
+  },
+  {
+    id: 5,
+    title: "Shiftally",
+    category: "SaaS / Web Development",
+    description:
+      "A SaaS-based shift management and job portal platform where contractors post available shifts and workers claim them in real time, with a dual-sided payment system for both job providers and seekers.",
+    image: "/projectimages/shiftally.JPG",
+  },
+  {
+    id: 6,
+    title: "Project 8 VIP",
+    category: "SaaS / Automation",
+    description:
+      "An AI-driven Telegram bot that interacts with users, manages free and VIP signal groups, and automates PayPal-based subscription payments through seamless integration with the Telegram Bot API.",
+    image: "/projectimages/project8.JPG",
+  },
 ];
 
 const categories = ["All", "3D Design", "Web Development", "SaaS"];
@@ -55,9 +62,10 @@ const categories = ["All", "3D Design", "Web Development", "SaaS"];
 export default function Projects() {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
-  const filteredProjects = selectedCategory === "All" 
-    ? projects 
-    : projects.filter(p => p.category === selectedCategory);
+  const filteredProjects =
+    selectedCategory === "All"
+      ? projects
+      : projects.filter((p) => p.category === selectedCategory);
 
   return (
     <div className="min-h-screen">
@@ -84,7 +92,6 @@ export default function Projects() {
                       ? "bg-[hsl(var(--neon-cyan))] text-background neon-glow-cyan"
                       : "bg-card text-muted-foreground hover-elevate"
                   }`}
-                  data-testid={`button-filter-${category.toLowerCase().replace(/\s+/g, '-')}`}
                 >
                   {category.toUpperCase()}
                 </button>
@@ -96,21 +103,15 @@ export default function Projects() {
                 <Card
                   key={project.id}
                   className="group overflow-hidden hover-elevate active-elevate-2 border-card-border transition-all duration-300 hover:-translate-y-2"
-                  data-testid={`card-project-${project.id}`}
                 >
-                  <div className="relative aspect-video bg-gradient-to-br from-card to-card-foreground/5 flex items-center justify-center overflow-hidden">
-                    <div className="absolute inset-0 opacity-10">
-                      <div className="absolute inset-0" style={{
-                        backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l25.98 15v30L30 60 4.02 45V15z' fill='none' stroke='%2300D9FF' stroke-width='1'/%3E%3C/svg%3E")`,
-                        backgroundSize: '60px 60px'
-                      }} />
-                    </div>
-                    <div className="relative z-10 text-center p-8">
-                      <div className="w-16 h-16 mx-auto mb-4 hexagon-clip bg-gradient-to-br from-[hsl(var(--neon-cyan))] to-[hsl(var(--neon-magenta))] neon-glow-cyan" />
-                      <p className="text-sm text-muted-foreground font-mono">
-                        Project Image Placeholder
-                      </p>
-                    </div>
+                  <div className="relative aspect-video flex items-center justify-center overflow-hidden bg-card">
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
                   </div>
                   <div className="p-6">
                     <div className="flex items-center justify-between mb-3">
