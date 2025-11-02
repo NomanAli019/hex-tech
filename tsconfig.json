@@ -22,12 +22,8 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./app/*"],               // ✅ main fix: "@/components/..." now resolves to app/components/
-      "@components/*": ["./app/components/*"],
-      "@lib/*": ["./app/lib/*"],
-      "@hooks/*": ["./app/hooks/*"],
-      "@assets/*": ["./attached_assets/*"],
-      "@shared/*": ["./shared/*"]
-    }
+  "@/*": ["./app/*"],
+  "@assets/*": ["./attached_assets/*"]
+}
   }
 }

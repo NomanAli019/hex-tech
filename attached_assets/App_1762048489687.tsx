@@ -36,11 +36,11 @@
 import { Switch, Route } from "wouter";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import Home from "@/attached_assets/Home_1762048500444";
-import WhatWeDo from "@/pages/WhatWeDo";
-import Projects from "@/pages/Projects";
-import Team from "@/pages/Team";
-import NotFound from "@/pages/not-found";
+import Home from "@assets/Home_1762048500444";
+import WhatWeDo from "@/what-we-do/page";
+import Projects from "@/projects/page";
+import Team from "@/team/page";
+import NotFound from "@/not-found";
 
 function Router() {
   return (
