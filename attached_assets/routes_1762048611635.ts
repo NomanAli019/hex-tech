@@ -1,20 +1,12 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage_1762048611636";
-import { insertContactMessageSchema } from "@assets/share";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/contact", async (req, res) => {
     try {
-      const validatedData = insertContactMessageSchema.parse(req.body);
-      const message = await storage.createContactMessage(validatedData);
-      
-      console.log("Contact form submission received:", {
-        name: message.name,
-        email: message.email,
-        message: message.message,
-        timestamp: message.createdAt
-      });
+      // Directly log received form data for now
+      console.log("Contact form submission received:", req.body);
 
       res.json({ 
         success: true, 
@@ -30,6 +22,5 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   const httpServer = createServer(app);
-
   return httpServer;
 }
