@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
-import { storage } from "./storage";
-import { insertContactMessageSchema } from "@shared/schema";
+import { storage } from "./storage_1762048611636";
+import { insertContactMessageSchema } from "@assets/share";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/contact", async (req, res) => {
