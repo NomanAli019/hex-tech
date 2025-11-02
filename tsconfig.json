@@ -20,14 +20,15 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./app/*"],
+      "@/*": ["./*"],
+      "@app/*": ["./app/*"],
       "@components/*": ["./app/components/*"],
       "@lib/*": ["./app/lib/*"],
       "@hooks/*": ["./app/hooks/*"],
       "@assets/*": ["./attached_assets/*"],
       "@shared/*": ["./shared/*"]
-    },
-    "baseUrl": "."
+    }
   }
 }
