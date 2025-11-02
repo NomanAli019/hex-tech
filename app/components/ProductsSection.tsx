@@ -7,29 +7,32 @@ import { ArrowRight, CheckCircle2 } from "lucide-react";
 const products = [
   {
     name: "Clashey",
-    tagline: "Competitive Gaming Platform",
-    description: "A revolutionary platform bringing gamers together for competitive tournaments, matchmaking, and community engagement.",
+    tagline: "Gaming Social Network",
+    description:
+      "A next-gen social platform for gamers to connect, form parties, and explore dynamic dungeons. Clashey blends community, competition, and creativity — from real-time gameplay tracking to in-app events and leaderboards.",
     features: [
-      "Real-time tournament management",
-      "Advanced matchmaking algorithms",
-      "Player statistics & rankings",
-      "Community forums & chat",
+      "Party creation & dungeon matchmaking",
+      "Social feed & player interactions",
+      "In-app events & leaderboards",
+      "Integrated chat & notifications",
     ],
     accent: "cyan",
   },
   {
     name: "Office Boy",
-    tagline: "Workspace Management Solution",
-    description: "Streamline your office operations with intelligent task automation, resource management, and team collaboration tools.",
+    tagline: "Smart Office Communication System",
+    description:
+      "A modern communication suite designed to replace traditional Cisco phones. Office Boy enables seamless internal calling, file sharing, and real-time messaging — built for offices that value efficiency and connectivity.",
     features: [
-      "Task automation & workflows",
-      "Resource scheduling & booking",
-      "Team collaboration hub",
-      "Analytics & reporting",
+      "Internal VoIP calling system",
+      "Real-time file & document sharing",
+      "Team chat & message notifications",
+      "Admin control & call logs dashboard",
     ],
     accent: "magenta",
   },
 ];
+
 
 export default function ProductsSection() {
   return (

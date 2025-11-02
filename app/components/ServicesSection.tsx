@@ -12,7 +12,7 @@ const services = [
   {
     icon: Code,
     title: "Web Development",
-    description: "Full-stack development solutions using modern technologies. We adapt to any stack or leverage our expertise in React, Node.js, and cloud platforms.",
+    description: "Full-stack development solutions using modern technologies. We adapt to any stack or leverage our expertise in Next.js , Flask , Django , Fastapi , React, Node.js, and cloud platforms.",
   },
   {
     icon: Rocket,

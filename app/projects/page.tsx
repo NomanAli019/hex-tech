@@ -7,41 +7,47 @@ import { Card } from "@/components/ui/card";
 
 const projects = [
   {
-    id: 1,
-    title: "Project Alpha",
-    category: "3D Design",
-    description: "Innovative 3D product visualization platform",
-  },
+  id: 1,
+  title: "Variostrong",
+  category: "3D Design",
+  description:
+    "A smart gym machine concept brought to life with 3D design — featuring an AI workout assistant, hydraulic resistance system, and a virtual training environment for full-body exercises.",
+},
+ {
+  id: 2,
+  title: "MarineOptim",
+  category: "Web Development",
+  description:
+    "A cutting-edge digital platform for optimizing marine operations and vessel performance — delivering real-time analytics, fuel-efficiency insights, and intelligent scheduling across global fleets.",
+},
+{
+  id: 3,
+  title: "Projectivity.ai",
+  category: "SaaS",
+  description:
+    "AI-powered task management platform that analyzes job descriptions to auto-generate projects, assign tasks to available employees, and streamline collaboration with real-time progress tracking and team updates.",
+},
   {
-    id: 2,
-    title: "Project Beta",
-    category: "Web Development",
-    description: "Enterprise-grade web application",
-  },
+  id: 4,
+  title: "Glucowatch 3D",
+  category: "3D Design",
+  description:
+    "A 3D concept and AR showcase of a smart glucose monitoring wristband designed for diabetic patients, featuring a Blender-rendered promotional video demonstrating its real-time health tracking capabilities.",
+},
   {
-    id: 3,
-    title: "Project Gamma",
-    category: "SaaS",
-    description: "Cloud-based collaboration tool",
-  },
-  {
-    id: 4,
-    title: "Project Delta",
-    category: "3D Design",
-    description: "AR-powered product showcase",
-  },
-  {
-    id: 5,
-    title: "Project Epsilon",
-    category: "Web Development",
-    description: "Real-time analytics dashboard",
-  },
-  {
-    id: 6,
-    title: "Project Zeta",
-    category: "SaaS",
-    description: "AI-driven automation platform",
-  },
+  id: 5,
+  title: "Shiftally",
+  category: "SaaS / Web Development",
+  description:
+    "A SaaS-based shift management and job portal platform where contractors post available shifts and workers claim them in real time, with a dual-sided payment system for both job providers and seekers.",
+},
+ {
+  id: 6,
+  title: "Project 8 VIP",
+  category: "SaaS / Automation",
+  description:
+    "An AI-driven Telegram bot that interacts with users, manages free and VIP signal groups, and automates PayPal-based subscription payments through seamless integration with the Telegram Bot API.",
+},
 ];
 
 const categories = ["All", "3D Design", "Web Development", "SaaS"];
