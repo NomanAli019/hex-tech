@@ -36,7 +36,7 @@
 import { Switch, Route } from "wouter";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import Home from "@/pages/Home";
+import Home from "@/attached_assets/Home_1762048500444";
 import WhatWeDo from "@/pages/WhatWeDo";
 import Projects from "@/pages/Projects";
 import Team from "@/pages/Team";
