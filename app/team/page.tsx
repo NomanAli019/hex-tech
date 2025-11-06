@@ -10,76 +10,131 @@ const teamMembers = [
     id: 1,
     name: "Noman Ali Khan",
     role: "Founder & CEO",
-    bio: "Visionary leader driving innovation and growth",
+    bio: "Visionary leader driving innovation and growth Full-stack Web Dev",
   },
-  {
-    id: 2,
-    name: "Team Member 2",
-    role: "Lead Developer",
-    bio: "Full-stack expert with 10+ years experience",
-  },
-  {
-    id: 3,
-    name: "Team Member 3",
-    role: "3D Design Lead",
-    bio: "Master of visual storytelling and 3D art",
-  },
-  {
-    id: 4,
-    name: "Team Member 4",
-    role: "Product Manager",
-    bio: "Strategic thinker turning ideas into reality",
-  },
-  {
-    id: 5,
-    name: "Team Member 5",
-    role: "UX Designer",
-    bio: "Crafting intuitive user experiences",
-  },
-  {
-    id: 6,
-    name: "Team Member 6",
-    role: "DevOps Engineer",
-    bio: "Infrastructure and deployment specialist",
-  },
+  // add more members here to test >1 behavior
 ];
 
 export default function Team() {
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [isPointerOver, setIsPointerOver] = useState(false);
+
+  // speed px per ms
+  const SPEED = 0.05;
 
   useEffect(() => {
-    if (!isAutoPlaying || !scrollRef.current) return;
+    const container = scrollRef.current;
+    if (!container) return;
 
-    const scrollContainer = scrollRef.current;
-    let animationId: number;
+    // when only 1 member, we do not autoplay
+    if (teamMembers.length <= 1) {
+      return;
+    }
+
+    let animationId = 0;
     let lastTimestamp = 0;
 
-    const scroll = (timestamp: number) => {
+    const getHalfWidth = () => container.scrollWidth / 2;
+
+    const step = (timestamp: number) => {
       if (!lastTimestamp) lastTimestamp = timestamp;
       const delta = timestamp - lastTimestamp;
-      
-      if (scrollContainer) {
-        scrollContainer.scrollLeft += delta * 0.05;
-        
-        if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
-          scrollContainer.scrollLeft = 0;
-        }
+
+      // Pause autoplay if pointer is over or state indicates paused
+      if (!isAutoPlaying || isPointerOver) {
+        lastTimestamp = timestamp;
+        animationId = requestAnimationFrame(step);
+        return;
       }
-      
+
+      container.scrollLeft += delta * SPEED;
+
+      // If we've scrolled past the first duplicated block, wrap by subtracting half width.
+      // Using >= is fine; this produces a smooth wrap without jumping to 0.
+      const half = getHalfWidth();
+      if (container.scrollLeft >= half) {
+        container.scrollLeft -= half;
+      }
+
       lastTimestamp = timestamp;
-      animationId = requestAnimationFrame(scroll);
+      animationId = requestAnimationFrame(step);
     };
 
-    animationId = requestAnimationFrame(scroll);
+    animationId = requestAnimationFrame(step);
 
+    // Clean up
     return () => {
-      if (animationId) {
-        cancelAnimationFrame(animationId);
-      }
+      if (animationId) cancelAnimationFrame(animationId);
     };
-  }, [isAutoPlaying]);
+  }, [isAutoPlaying, isPointerOver]);
 
+  // If there is only 1 member, center it
+  if (teamMembers.length <= 1) {
+    const member = teamMembers[0];
+    return (
+      <div className="min-h-screen">
+        <Navigation />
+        <main className="pt-24 pb-16">
+          <section className="py-16 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto">
+              <div className="text-center mb-16">
+                <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-tighter">
+                  <span className="gradient-text-neon">OUR TEAM</span>
+                </h1>
+                <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+                  Meet the talented individuals behind Hex Tech's success
+                </p>
+              </div>
+
+              <div className="flex justify-center">
+                <Card
+                  className="w-80 p-8 border-2 border-[hsl(var(--neon-cyan))]/30 neon-glow-cyan hover-elevate transition-all duration-300"
+                  data-testid={`card-team-${member.id}`}
+                >
+                  <div className="mb-6">
+                    <div className="w-32 h-32 mx-auto rounded-full p-[3px] bg-gradient-to-br from-[hsl(var(--neon-cyan))]/20 to-[hsl(var(--neon-magenta))]/20 border-2 border-[hsl(var(--neon-cyan))]/50 neon-glow-cyan overflow-hidden">
+                      <img
+                        src={`/projectimages/Noman.png`} // 👈 Example path: /public/team/1.jpg
+                        alt={member.name}
+                        className="w-full h-full object-cover rounded-full"
+                      />
+                    </div>
+
+                  </div>
+                  <div className="text-center">
+                    <h3 className="text-2xl font-bold mb-2 tracking-tight">
+                      {member.name}
+                    </h3>
+                    <p className="text-[hsl(var(--neon-cyan))] font-medium mb-3 tracking-wide">
+                      {member.role}
+                    </p>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {member.bio}
+                    </p>
+                  </div>
+                </Card>
+              </div>
+
+              <div className="text-center mt-8">
+                <p className="text-sm text-muted-foreground">
+                  
+                </p>
+              </div>
+            </div>
+          </section>
+        </main>
+        <Footer />
+        <style jsx>{`
+          .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+          }
+        `}</style>
+      </div>
+    );
+  }
+
+  // For >1 members, render the seamless auto-scrolling carousel
   return (
     <div className="min-h-screen">
       <Navigation />
@@ -96,14 +151,25 @@ export default function Team() {
             </div>
 
             <div className="relative">
-              <div 
+              <div
                 ref={scrollRef}
                 className="flex gap-8 overflow-x-auto pb-8 scroll-smooth hide-scrollbar"
-                onMouseEnter={() => setIsAutoPlaying(false)}
-                onMouseLeave={() => setIsAutoPlaying(true)}
-                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                onMouseEnter={() => {
+                  setIsPointerOver(true);
+                }}
+                onMouseLeave={() => {
+                  setIsPointerOver(false);
+                }}
+                onTouchStart={() => {
+                  setIsPointerOver(true);
+                }}
+                onTouchEnd={() => {
+                  setIsPointerOver(false);
+                }}
+                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
                 data-testid="team-scroller"
               >
+                {/* duplicate the list so we can wrap seamlessly */}
                 {[...teamMembers, ...teamMembers].map((member, index) => (
                   <Card
                     key={`${member.id}-${index}`}
@@ -131,14 +197,15 @@ export default function Team() {
                   </Card>
                 ))}
               </div>
-              
+
+              {/* left + right fade to mask duplication seam */}
               <div className="absolute left-0 top-0 bottom-8 w-20 bg-gradient-to-r from-background to-transparent pointer-events-none" />
               <div className="absolute right-0 top-0 bottom-8 w-20 bg-gradient-to-l from-background to-transparent pointer-events-none" />
             </div>
 
             <div className="text-center mt-8">
               <p className="text-sm text-muted-foreground">
-                Hover over the carousel to pause auto-scroll
+                Hover or touch the carousel to pause auto-scroll
               </p>
             </div>
           </div>
